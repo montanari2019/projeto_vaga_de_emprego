@@ -39,22 +39,22 @@
                 <div class="card-body">
 
                     <label for="coordenador" class="label--main">Coordenador: </label>
-                    <input type="text" class="form-control" placeholder="Coordenador">
+                    <input type="text" class="form-control" placeholder="Coordenador" id="coordenador">
 
                     <label for="desenvolvedor01" class="label--main">Desenvolvedor 1: </label>
-                    <input type="text" class="form-control" placeholder="1º Desenvolvedor">
+                    <input type="text" class="form-control" placeholder="1º Desenvolvedor" id="desenvolvedor_1">
 
                     <label for="desenvolvedor02" class="label--main">Desenvolvedor 2: </label>
-                    <input type="text" class="form-control" placeholder="2º Desenvolvedor">
+                    <input type="text" class="form-control" placeholder="2º Desenvolvedor" id="desenvolvedor_2">
 
                     <label for="desenvolvedor03" class="label--main">Desenvolvedor 3: </label>
-                    <input type="text" class="form-control" placeholder="3º Desenvolvedor">
+                    <input type="text" class="form-control" placeholder="3º Desenvolvedor" id="desenvolvedor_3">
 
                     <br>
                     <div class="ajuste-btn">
-                        <button class="btn-sucesso">Sincornizar</button>
+                        <button type="submit"  class="btn-sucesso" id="btn-sincronizar">Sincornizar</button>
 
-                        <button class="btn-primario">Inserir</button>
+                        <button type="submit" class="btn-primario" id="btn-inserir">Inserir</button>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,7 @@
                             <ul class="ul">
                                 <li class="lista-item">
                                     Coordenador
+                                    
                                 </li>
                                 <li class="lista-item">
                                     Desenvolvedor
@@ -78,30 +79,12 @@
                                 <li class="lista-item">
                                     Desenvolvedor
                                 </li>
-                            </ul>
+                            </ul>   
                     </div>
-                </div>
+                    <button type="button" class="btn-deletar">Deletar</button>  
 
-                <div>
-                    <h6 class="main-title">Equipe <span class="badge badge-info">2</span></h6>
-                    <div class="div-card">
-                            <ul class="ul">
-                                <li class="lista-item">
-                                    Coordenador
-                                </li>
-                                <li class="lista-item">
-                                    Desenvolvedor
-                                </li>
-                                <li class="lista-item">
-                                    Desenvolvedor
-                                </li>
-                                <li class="lista-item">
-                                    Desenvolvedor
-                                </li>
-                            </ul>
-                    </div>
                 </div>
-           </section class="conteiner_ajuste-main">
+           </section>
 
            
     
@@ -127,5 +110,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <script src="Js/tela01.js"></script>
 </body>
 </html>
