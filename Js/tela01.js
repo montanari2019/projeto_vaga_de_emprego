@@ -1,73 +1,57 @@
-var coordenador = document.getElementById('coordenador')
+let coordenador = document.querySelector('#coordenador')
 
-var dev01 = document.getElementById('desenvolvedor_1')
+let dev1 = document.querySelector('#desenvolvedor_1')
 
-var dev02 = document.getElementById('desenvolvedor_2')
+let dev2 = document.querySelector('#desenvolvedor_2')
 
-var dev03 = document.getElementById('desenvolvedor_3')
-
-// 
+let dev3 = document.querySelector('#desenvolvedor_3')
 
 
 
 
-function addLocalStorage(coord, desenvolvedor01, desenvolvedor02, desenvolvedor03){
+
+
+function gravar(){
     
-    
-    console.log(coord.value)
-    console.log(desenvolvedor01.value)
-
     let equipe = {
-        "coordenador": coord,
-        "dev01": desenvolvedor01, 
-        "dev02": desenvolvedor02,
-        "dev03": desenvolvedor03
+        "coordenador": coordenador.value,
+        "dev1": dev1.value, 
+        "dev2": dev2.value,
+        "dev3": dev3.value
     }
-
-   
     
-    if(localStorage.getItem("listaEquipes")){
+    if (localStorage.getItem("listaEquipes")){
 
-        let listaEquipes = JSON.parse(localStorage.getItem(listaEquipes))
+        let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
         listaEquipes.push(equipe)
         localStorage.setItem("listaEquipes", JSON.stringify(listaEquipes))
 
-    }else{
+        console.log('Gravando no LocalStorage existente')
+
+    } else {
         
         let listaEquipes = []
         listaEquipes.push(equipe)
         localStorage.setItem("listaEquipes", JSON.stringify(listaEquipes))
+
+        console.log('Gravando em um novo LocalStorage')
     }
-
-    
-
-    // equipes.add
-    // console.log(equipes.value[0])
 }
 
-// function addlista(coordenador, dev01,dev02,dev03){
-//     let listaCoordenador = document.createElement('ul')
-//     listaCoordenador.innerHTML = coordenador
 
-//     let listaDev01 = document.createElement('ul')
-//     listaDev01.innerHTML = dev01
+function imprimirLocalStorage(){
+    let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
+    console.log(listaEquipes)
+}
 
-//     let listaDev02 = document.createElement('ul')
-//     listaDev02.innerHTML = dev02
-
-//     let listaDev03 = document.createElement('ul')
-//     listaDev03.innerHTML = dev03
-
-//     console.log("Adicionando na lista")
-// }
-
-function limpar_formulario(){
+function limparFormulario(){
     coordenador.value = ""
-    dev01.value = ""
-    dev02.value = ""
-    dev03.value = ""
+    dev1.value = ""
+    dev2.value = ""
+    dev3.value = ""
 
     coordenador.focus()
+    console.log("Limpando Formulário")
 }
 
 // evento do clik do botão inserir 
@@ -76,8 +60,12 @@ document.querySelector("#btn-inserir").addEventListener("click", () =>{
     event.preventDefault();
     console.log("Pegando os nomes com o clik")
 
-    addLocalStorage(coordenador.value, dev01.value, dev02.value, dev03.value)
+    gravar()
+    
+    imprimirLocalStorage()
+    
+    
      
 
-    limpar_formulario()
+    limparFormulario()
 })
