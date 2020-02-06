@@ -9,6 +9,41 @@ let dev3 = document.querySelector('#desenvolvedor_3')
 
 
 
+function addlista(){
+
+    // Buscando dado no HTML
+    let ulList = document.querySelector('#lista')
+
+    // Mapeando os dados 
+    let linhaCoodenador = document.createElement('li')
+    linhaCoodenador.innerHTML = coordenador.value
+
+    let linhaDev1 = document.createElement('li')
+    linhaDev1.innerHTML = dev1.value
+
+    let linhaDev2 = document.createElement('li')
+    linhaDev2.innerHTML = dev2.value
+
+    let linhaDev3 = document.createElement('li')
+    linhaDev3.innerHTML = dev3.value
+
+
+    let linhaUl = document.createElement('ul')
+    
+    linhaUl.appendChild(linhaCoodenador)
+    linhaUl.appendChild(linhaDev1)
+    linhaUl.appendChild(linhaDev2)
+    linhaUl.appendChild(linhaDev3)
+
+
+    ulList.appendChild(linhaUl)
+
+    console.log("Listando os dados Função Addlista")
+   
+
+    
+
+}
 
 
 function gravar(){
@@ -36,6 +71,8 @@ function gravar(){
 
         console.log('Gravando em um novo LocalStorage')
     }
+
+    
 }
 
 
@@ -61,6 +98,8 @@ document.querySelector("#btn-inserir").addEventListener("click", () =>{
     console.log("Pegando os nomes com o clik")
 
     gravar()
+
+    addlista()
     
     imprimirLocalStorage()
     
