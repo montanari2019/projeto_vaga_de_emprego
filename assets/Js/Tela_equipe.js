@@ -1,54 +1,48 @@
 let coordenador = document.querySelector('#coordenador')
-
 let dev1 = document.querySelector('#desenvolvedor_1')
-
 let dev2 = document.querySelector('#desenvolvedor_2')
-
 let dev3 = document.querySelector('#desenvolvedor_3')
 
+// Mudei aqui
+// Buscando dado no HTML
+let lista = document.querySelector('#lista')
 
+function addlista(equipe){
 
-
-function addlista(){
-
-    // Buscando dado no HTML
-    let ulList = document.querySelector('#lista')
+    let novaUl = document.createElement('ul')
 
     // Mapeando os dados 
     let linhaCoodenador = document.createElement('li')
-    linhaCoodenador.innerHTML = coordenador.value
+    linhaCoodenador.innerHTML = equipe.coordenador
+    linhaCoodenador.classList.add('lista-item')
 
     let linhaDev1 = document.createElement('li')
-    linhaDev1.innerHTML = dev1.value
+    linhaDev1.innerHTML = equipe.dev1
+    linhaDev1.classList.add('lista-item')
 
     let linhaDev2 = document.createElement('li')
-    linhaDev2.innerHTML = dev2.value
+    linhaDev2.innerHTML = equipe.dev2
+    linhaDev2.classList.add('lista-item')
 
     let linhaDev3 = document.createElement('li')
-    linhaDev3.innerHTML = dev3.value
+    linhaDev3.innerHTML = equipe.dev3
+    linhaDev3.classList.add('lista-item')
 
+    novaUl.appendChild(linhaCoodenador)
+    novaUl.appendChild(linhaDev1)
+    novaUl.appendChild(linhaDev2)
+    novaUl.appendChild(linhaDev3)
 
-    let linhaUl = document.createElement('ul')
-    
-    linhaUl.appendChild(linhaCoodenador)
-    linhaUl.appendChild(linhaDev1)
-    linhaUl.appendChild(linhaDev2)
-    linhaUl.appendChild(linhaDev3)
-
-
-    ulList.appendChild(linhaUl)
+    lista.appendChild(novaUl)
 
     console.log("Listando os dados Função Addlista")
-   
-
-    
-
 }
 
 
 function gravar(){
     
     let equipe = {
+
         "coordenador": coordenador.value,
         "dev1": dev1.value, 
         "dev2": dev2.value,
@@ -75,6 +69,24 @@ function gravar(){
     
 }
 
+// Carregando dados do local Storage
+function carregarLocarStorage(){
+
+    // Mudei aqui
+    // Limpar a lista
+    lista.innerHTML = ''
+
+    if(localStorage.getItem("listaEquipes")){
+        
+        let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
+
+        // Mudei aqui
+        listaEquipes.forEach((equipe) => {
+            addlista(equipe)
+        })
+        console.log('Carregando do local storage')
+    }
+}
 
 function imprimirLocalStorage(){
     let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
@@ -99,12 +111,9 @@ document.querySelector("#btn-inserir").addEventListener("click", () =>{
 
     gravar()
 
-    addlista()
+    carregarLocarStorage()
     
     imprimirLocalStorage()
-    
-    
-     
 
-    limparFormulario()
+    limparFormulario()  
 })
