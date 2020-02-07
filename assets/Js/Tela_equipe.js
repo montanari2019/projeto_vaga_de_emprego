@@ -3,18 +3,18 @@ let dev1 = document.querySelector('#desenvolvedor_1')
 let dev2 = document.querySelector('#desenvolvedor_2')
 let dev3 = document.querySelector('#desenvolvedor_3')
 
-// Mudei aqui
+
 // Buscando dado no HTML
 let lista = document.querySelector('#lista')
 
-function addlista(equipe){
+function addlista(equipe, indice){
 
     let novaUl = document.createElement('ul')
 
     // Mapeando os dados 
     let linhaCoodenador = document.createElement('li')
     linhaCoodenador.innerHTML = equipe.coordenador
-    linhaCoodenador.classList.add('lista-item')
+    linhaCoodenador.classList.add('lista-item-titulo')
 
     let linhaDev1 = document.createElement('li')
     linhaDev1.innerHTML = equipe.dev1
@@ -28,17 +28,37 @@ function addlista(equipe){
     linhaDev3.innerHTML = equipe.dev3
     linhaDev3.classList.add('lista-item')
 
+    let btnDeletar = document.createElement('button')
+    btnDeletar.innerHTML = ' <img src="assets/imagem/iconfinder_Streamline-70_185090.svg" alt="Deletar">'
+    btnDeletar.classList.add('btn-deletar')
+
+    // Deletando equipe
+    btnDeletar.addEventListener('click', () =>{
+        event.preventDefault()
+
+        let res = confirm('Deseja Deletar Essa equipe')
+
+        if(res == true){
+            deletarEquipe(indice)
+        }
+
+    })
+
+
     novaUl.appendChild(linhaCoodenador)
     novaUl.appendChild(linhaDev1)
     novaUl.appendChild(linhaDev2)
     novaUl.appendChild(linhaDev3)
+    novaUl.appendChild(btnDeletar)
+    console.log('Deletando')
 
     lista.appendChild(novaUl)
-
+    
     console.log("Listando os dados Função Addlista")
 }
 
 
+// Função de gravar dados no local Storage
 function gravar(){
     
     let equipe = {
@@ -72,7 +92,7 @@ function gravar(){
 // Carregando dados do local Storage
 function carregarLocarStorage(){
 
-    // Mudei aqui
+    
     // Limpar a lista
     lista.innerHTML = ''
 
@@ -80,19 +100,37 @@ function carregarLocarStorage(){
         
         let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
 
-        // Mudei aqui
-        listaEquipes.forEach((equipe) => {
-            addlista(equipe)
+       
+        listaEquipes.forEach((equipe, id) => {
+            addlista(equipe, id)
         })
         console.log('Carregando do local storage')
+        
     }
 }
 
+// Função de Deletar 
+function deletarEquipe(index){
+
+    
+
+    let equipes = JSON.parse(localStorage.getItem('listaEquipes'))
+    equipes.splice(index, 1)
+
+    localStorage.setItem('listaEquipes', JSON.stringify(equipes))
+    carregarLocarStorage()
+    console.log("Equipe Deletada")
+
+    alert
+}
+
+// Função de imprimir o local storage no console
 function imprimirLocalStorage(){
     let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
     console.log(listaEquipes)
 }
 
+// Função de limpar o formulário
 function limparFormulario(){
     coordenador.value = ""
     dev1.value = ""
@@ -102,6 +140,13 @@ function limparFormulario(){
     coordenador.focus()
     console.log("Limpando Formulário")
 }
+
+// Envento de click do botão sincronizar
+document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
+    event.preventDefault();
+    console.log("Sincronizando dados com o localStorage")
+    carregarLocarStorage()
+})
 
 // evento do clik do botão inserir 
 document.querySelector("#btn-inserir").addEventListener("click", () =>{

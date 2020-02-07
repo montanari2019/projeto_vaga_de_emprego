@@ -1,6 +1,8 @@
+
 .conteiner_ajuste{
     display: flex;
     flex-wrap: wrap;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
 }
@@ -107,6 +109,7 @@
     font-size: 12px;
     padding-top: 6px;
     padding-bottom: 3px;
+    color: #6C757D;
 
 }
 .btn-sucesso{
@@ -145,6 +148,7 @@
 }
 .btn-deletar{
     /* display: block; */
+    
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -166,12 +170,8 @@
    
 }
 
-.btn-deletar:hover{
-    background-color: #ffffff;
-    color: #e74545;
-    border: solid 1px #e74545;
-}
 .ajuste-btn{
+    margin-top: 10px;
     display: flex;
     flex-direction: row;
     justify-content:space-between;
@@ -182,7 +182,22 @@
     border-radius: 3px;
     margin-bottom: 30px;
     margin-top: 10px;
+    padding: 2%;
 
+}
+.input-text{
+    margin-bottom: 5px;
+    padding: 6px;
+    padding-right: 40%;
+    border: solid 1px #dbdbdb;
+    border-radius: 4px;
+    color: #6c757d;
+}
+@media(min-width: 650px){
+    .input-text{
+        width: 100%;
+    }
+   
 }
 .ul{
     text-decoration: none;
@@ -196,7 +211,17 @@
     text-decoration: none;
     list-style-type: none;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
+    font-style: normal;
+
+}
+.lista-item-titulo{
+    padding: 10px;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
 
 }
 .info-equipe{
@@ -209,17 +234,6 @@
     margin: 10px;
     border-radius: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
 
 .footer{
 
