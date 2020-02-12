@@ -12,6 +12,7 @@
 
 
 
+
 .header{
     
     background: #00428F;
@@ -34,6 +35,11 @@
         font-size: 24px;
         padding-left: 50px;
         padding-bottom: 0;
+    }
+    .flexbox{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
    
 }
@@ -223,6 +229,21 @@
     font-size: 20px;
     font-weight: bold;
 
+}
+.lista-item-coordenador{
+    padding: 10px;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bolder;
+    border: solid 1px #d3d3d3;
+    border-radius: 5px;
+}
+.lista-item-coordenador:hover{
+    background-color: #303030;
+    color: #f2f2f2;
+    
 }
 .info-equipe{
     text-align: center;

@@ -2,6 +2,7 @@ let coordenador = document.querySelector('#coordenador')
 let dev1 = document.querySelector('#desenvolvedor_1')
 let dev2 = document.querySelector('#desenvolvedor_2')
 let dev3 = document.querySelector('#desenvolvedor_3')
+let nomeEquipe = document.querySelector('#equipe')
 
 
 // Buscando dado no HTML
@@ -10,11 +11,17 @@ let lista = document.querySelector('#lista')
 function addlista(equipe, indice){
 
     let novaUl = document.createElement('ul')
+    novaUl.classList.add('div-card')
 
     // Mapeando os dados 
+
+    let linhaEquipe = document.createElement('li')
+    linhaEquipe.innerHTML = equipe.nomeEquipe
+    linhaEquipe.classList.add('lista-item-titulo')
+
     let linhaCoodenador = document.createElement('li')
     linhaCoodenador.innerHTML = equipe.coordenador
-    linhaCoodenador.classList.add('lista-item-titulo')
+    linhaCoodenador.classList.add('lista-item-coordenador')
 
     let linhaDev1 = document.createElement('li')
     linhaDev1.innerHTML = equipe.dev1
@@ -45,6 +52,7 @@ function addlista(equipe, indice){
     })
 
 
+    novaUl.appendChild(linhaEquipe)
     novaUl.appendChild(linhaCoodenador)
     novaUl.appendChild(linhaDev1)
     novaUl.appendChild(linhaDev2)
@@ -63,6 +71,8 @@ function gravar(){
     
     let equipe = {
 
+
+        "nomeEquipe": nomeEquipe.value,
         "coordenador": coordenador.value,
         "dev1": dev1.value, 
         "dev2": dev2.value,
@@ -121,7 +131,7 @@ function deletarEquipe(index){
     carregarLocarStorage()
     console.log("Equipe Deletada")
 
-    alert
+    
 }
 
 // Função de imprimir o local storage no console
@@ -132,6 +142,7 @@ function imprimirLocalStorage(){
 
 // Função de limpar o formulário
 function limparFormulario(){
+    nomeEquipe.value = ""
     coordenador.value = ""
     dev1.value = ""
     dev2.value = ""
@@ -141,7 +152,7 @@ function limparFormulario(){
     console.log("Limpando Formulário")
 }
 
-// Envento de click do botão sincronizar
+// Envento de click do botão sincronizar com o LocalStorage
 document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
     event.preventDefault();
     console.log("Sincronizando dados com o localStorage")

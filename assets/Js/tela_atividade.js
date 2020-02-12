@@ -6,31 +6,34 @@ let comboEquipe = document.querySelector('#combobox_equipe')
 
 let atividadeVue = document.querySelector('#atividadeVue')
 
-function vueAtividade(atividade){
+function vueAtividade(atividade, indice){
 
-    let titulo = document.createElement('h1')
-    let textitulo = document.createTextNode(atividade.tituloAtividade)
-    titulo.innerHTML = textitulo
+    let novaUl = document.createElement('ul')
+    novaUl.classList.add('div_card-tarefa')
     
 
-    let descricao = document.createElement('p')
-    let texDescricao = document.createTextNode(atividade.descricao)
-    descricao.innerHTML = texDescricao
+    let titulo = document.createElement('li')
+    titulo.innerHTML = atividade.tituloAtividade
+    titulo.classList.add('titulo-tarefa')
     
 
-    let equipeResponsavel = document.createElement('h6')
-    let textEquipe = document.createTextNode(atividade.comboEquipe)
-    equipeResponsavel.innerHTML = textEquipe
+    let descricao = document.createElement('li')
+    descricao.innerHTML = atividade.descricao
+    descricao.classList.add('descricao-tarefa')
+    
 
-    
-    
+    let equipeResponsavel = document.createElement('li')
+    equipeResponsavel.innerHTML = atividade.comboEquipe
+    equipeResponsavel.classList.add('equipe-tarefa')
+
+    novaUl.appendChild(titulo)
+    novaUl.appendChild(descricao)
+    novaUl.appendChild(equipeResponsavel)
+
+    atividadeVue.appendChild(novaUl)
 
     console.log('Gerando Vue das atividades')
-
-
-
 }
-
 
 // Função de gravar dados no local Storage
 function addLocalStorage(){
@@ -56,9 +59,24 @@ function addLocalStorage(){
 
         console.log('Gravando em um novo LocalStorage')
     }
-    vueAtividade(atividade)
 }
  
+function carregarLocalStorage(){
+
+    // Limpando lista
+    atividadeVue.innerHTML = ''
+
+    if(localStorage.getItem('atividadesList')){
+        
+        let atividadeList = JSON.parse(localStorage.getItem('atividadesList'))
+
+        atividadeList.forEach(atividade, id => {
+            
+        })
+
+        console.log('Carregando do local storage')
+    }
+}
 
 // Função de Limpar Formulário
 function limparFormulario(){
@@ -71,6 +89,11 @@ function limparFormulario(){
     console.log('Limpando Formulário')
 }
 
+document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
+    event.preventDefault()
+    carregarLocalStorage()
+    console.log('Sincronizando com o LocalStorage')
+})
 
 document.querySelector('#btn-inserir').addEventListener('click', () =>{
 
@@ -78,6 +101,9 @@ document.querySelector('#btn-inserir').addEventListener('click', () =>{
     console.log("pegando dados com o click")
 
     addLocalStorage()
+
+    // carregarLocalStorage()
+    vueAtividade(atividade, id)
 
     
 
