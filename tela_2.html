@@ -12,8 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    
+    <!--  " -->
 </head>
-<body>
+<body onload="carregarEquipe(), carregarLocalStorage()">
     <header class="header conteiner_ajuste">
         <div>
             <div class=" header-titulo">Gerenciador de </div>
@@ -39,13 +40,21 @@
                     <label for="descricao" class="label--main--tarefa">Descrição </label>
                     <input type="text" class="input-text-description" placeholder="Digite a Descrição da Tarefa" id="descricao_atividade">
 
-                    <select name="equipeOpcao" id="selectEquipe" class="selectCombo">
+                    <select name="equipeOpcao" id="selectEquipe" name="Escolha Uma Equipe" class="selectCombo">
+                        <option >Equipe</option>
                         
                     </select>
 
-                    <select id="selectMembro" class="selectCombo">
-                                
+                    <select id="selectMembro" name="Escolha um Membro" class="selectCombo" >
+                        <option>Membro</option>
+                        <!-- <option>Ikaro</option>
+                        <option>Marco</option>
+                        <option>Evaldo</option> -->
+
                     </select>
+                    
+
+                 
 
                     <br>
                     <div class="ajuste-btn">
@@ -67,7 +76,8 @@
                     com o Front End, quando tudo estiver pronto 
                     subir o código sem erros para o repositório Git
                 </p>
-                <h6 class="equipe-tarefa">Evado</h6>
+                <h6 class="equipe-tarefa">Alpha</h6>
+                <h6 class="equipe-tarefa">Evaldo</h6>
             </div>
 
             <div class="div_card-tarefa">
@@ -78,8 +88,9 @@
                     com o Front End, quando tudo estiver pronto 
                     subir o código sem erros para o repositório Git
                 </p>
-                <h6 class="equipe-tarefa">Evado</h6>
-            </div> -->
+                <h6 class="equipe-tarefa">Delta</h6>
+                <h6 class="equipe-tarefa">Danilo</h6> -->
+            </div>
          </section>
     </main>
 

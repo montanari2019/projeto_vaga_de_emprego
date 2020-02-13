@@ -62,7 +62,7 @@ function addlista(equipe, indice){
 
     lista.appendChild(novaUl)
     
-    console.log("Listando os dados Função Addlista")
+    
 }
 
 
@@ -152,11 +152,11 @@ function limparFormulario(){
     console.log("Limpando Formulário")
 }
 
-// Envento de click do botão sincronizar com o LocalStorage
+// Envento de click do botão sincronizar com a API
 document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
     event.preventDefault();
-    console.log("Sincronizando dados com o localStorage")
-    carregarLocarStorage()
+    
+    
 })
 
 // evento do clik do botão inserir 
