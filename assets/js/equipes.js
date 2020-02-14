@@ -36,7 +36,7 @@ function addlista(equipe, indice){
     linhaDev3.classList.add('lista-item')
 
     let btnDeletar = document.createElement('button')
-    btnDeletar.innerHTML = ' <img src="assets/imagem/iconfinder_Streamline-70_185090.svg" alt="Deletar">'
+    btnDeletar.innerHTML = '<img src="assets/imagem/deletar.svg" alt="Deletar">'
     btnDeletar.classList.add('btn-deletar')
 
     // Deletando equipe
@@ -51,7 +51,6 @@ function addlista(equipe, indice){
 
     })
 
-
     novaUl.appendChild(linhaEquipe)
     novaUl.appendChild(linhaCoodenador)
     novaUl.appendChild(linhaDev1)
@@ -61,17 +60,13 @@ function addlista(equipe, indice){
     console.log('Deletando')
 
     lista.appendChild(novaUl)
-    
-    
+
 }
 
-
 // Função de gravar dados no local Storage
-function gravar(){
+function addLocalStorage(){
     
     let equipe = {
-
-
         "nomeEquipe": nomeEquipe.value,
         "coordenador": coordenador.value,
         "dev1": dev1.value, 
@@ -95,14 +90,12 @@ function gravar(){
 
         console.log('Gravando em um novo LocalStorage')
     }
-
     
 }
 
 // Carregando dados do local Storage
 function carregarLocarStorage(){
 
-    
     // Limpar a lista
     lista.innerHTML = ''
 
@@ -122,26 +115,18 @@ function carregarLocarStorage(){
 // Função de Deletar 
 function deletarEquipe(index){
 
-    
-
     let equipes = JSON.parse(localStorage.getItem('listaEquipes'))
     equipes.splice(index, 1)
 
     localStorage.setItem('listaEquipes', JSON.stringify(equipes))
     carregarLocarStorage()
     console.log("Equipe Deletada")
-
     
-}
-
-// Função de imprimir o local storage no console
-function imprimirLocalStorage(){
-    let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
-    console.log(listaEquipes)
 }
 
 // Função de limpar o formulário
 function limparFormulario(){
+
     nomeEquipe.value = ""
     coordenador.value = ""
     dev1.value = ""
@@ -154,8 +139,8 @@ function limparFormulario(){
 
 // Envento de click do botão sincronizar com a API
 document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
-    event.preventDefault();
     
+    event.preventDefault();   
     
 })
 
@@ -163,13 +148,12 @@ document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
 document.querySelector("#btn-inserir").addEventListener("click", () =>{
 
     event.preventDefault();
+
     console.log("Pegando os nomes com o clik")
 
-    gravar()
+    addLocalStorage()
 
     carregarLocarStorage()
-    
-    imprimirLocalStorage()
 
     limparFormulario()  
 })

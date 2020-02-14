@@ -21,16 +21,24 @@ function addListaTarefa(tarefas, id){
     linhaDescricao.innerHTML = tarefas.descricao
     linhaDescricao.classList.add('descricao-tarefa')
 
+    let labelResponsavel = document.createElement('label')
+    labelResponsavel.innerHTML = 'Desenvolvedor responsável:'
+    labelResponsavel.classList.add('label--main--tarefa') 
+
     let linhaResponsavel = document.createElement('p')
     linhaResponsavel.innerHTML = tarefas.responsavel
     linhaResponsavel.classList.add('equipe-tarefa')
+
+    let labelEquipe = document.createElement('label')
+    labelEquipe.innerHTML = 'Equipe do desenvolvedor:'
+    labelEquipe.classList.add('label--main--tarefa')
 
     let linhaEquipe = document.createElement('p')
     linhaEquipe.innerHTML = tarefas.equipe
     linhaEquipe.classList.add('equipe-tarefa')
 
     let btnDeletar = document.createElement('button')
-    btnDeletar.innerHTML = ' <img src="assets/imagem/iconfinder_Streamline-70_185090.svg" alt="Deletar">'
+    btnDeletar.innerHTML = '<img src="assets/imagem/deletar.svg" alt="Deletar">'
     btnDeletar.classList.add('btn-deletar')
 
       // Deletando Tarefas
@@ -45,18 +53,16 @@ function addListaTarefa(tarefas, id){
 
     })
 
-
-
-
     novaUlTarefas.appendChild(linhaTitulo)
     novaUlTarefas.appendChild(linhaDescricao)
+    novaUlTarefas.appendChild(labelResponsavel)
     novaUlTarefas.appendChild(linhaResponsavel)
+    novaUlTarefas.appendChild(labelEquipe)
     novaUlTarefas.appendChild(linhaEquipe)
     novaUlTarefas.appendChild(btnDeletar)
 
     listaTarefa.appendChild(novaUlTarefas)
 }
-
 
 // Função para Adicionar no localStorage
 function addLocalStorage(){
@@ -70,18 +76,21 @@ function addLocalStorage(){
     }
 
     if(localStorage.getItem('tarefas')){
+
         let tarefas = JSON.parse(localStorage.getItem("tarefas"))
         tarefas.push(tarefasEquipe)
         localStorage.setItem("tarefas", JSON.stringify(tarefas))
 
         console.log('Gravando no LocalStorage existente')
-    }
-    else{
+
+    } else {
+        
         let tarefas = []
         tarefas.push(tarefasEquipe)
         localStorage.setItem("tarefas", JSON.stringify(tarefas))
 
         console.log('Gravando em um novo LocalStorage')
+
     }
 }
 
@@ -111,108 +120,96 @@ function deletarTarefa(index){
 
     localStorage.setItem('tarefas', JSON.stringify(tarefas))
     console.log("Atividade Deletada")
-    carregarLocalStorage()
-   
-
-    
+    carregarLocalStorage() 
 }
-
-// Função para preencher o select 
-function addSelectComboEquipe(equipe){
-
-    let opitionEquipe = document.createElement('option')
-    opitionEquipe.innerHTML = equipe.nomeEquipe
-
-    comboEquipe.appendChild(opitionEquipe)
-    console.log('Listando Opções das Equipes')
-    console.log("Populando Select")
-  
-
-}
-comboEquipe.addEventListener('change', (equipe) =>{
-    console.log('Acionando a função de carregar membro')
-    addSelectComboMembro(equipe)
-    
-})
-function addSelectComboMembro(equipe){
-    console.log('Entrando na função carregar Membro')
-
-    for(var i = 0; i <= equipe.lenght; i++){
-        console.log('Entrando no laço de Repetição')
-        if(equipe.nomeEquipe[i] == comboEquipe.value){
-
-            
-
-            let opitionCoordenador = document.createElement('option')
-            opitionCoordenador.innerHTML = equipe.coordenador
-
-            let opitionDev1 = document.createElement('option')
-            opitionDev1.innerHTML = equipe.dev1
-
-            let opitionDev2 = document.createElement('option')
-            opitionDev2.innerHTML = equipe.dev2
-            
-            let opitionDev3 = document.createElement('option')
-            opitionDev3.innerHTML = equipe.dev3
-
-
-            comboMembro.appendChild(opitionCoordenador)
-            comboMembro.appendChild(opitionDev1)
-            comboMembro.appendChild(opitionDev2)
-            comboMembro.appendChild(opitionDev3)
-            console.log('Populando Membros')
-        }
-    }
-}
-
-
-
-
 
 // Puxando os dados do localStorage das equipes para popular o select
 function carregarEquipe(){
     
-      if(localStorage.getItem("listaEquipes")){
-          
-          let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
-  
-         
-          listaEquipes.forEach((equipe, id) => {
-              addSelectComboEquipe(equipe, id)
-          })
-          console.log('Carregando do local storage equipes')
-          
-      }
-      
+    if(localStorage.getItem("listaEquipes")){
+        
+        let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
+        
+        listaEquipes.forEach((equipe) => {
+            
+            let optionEquipe = document.createElement('option')
+            optionEquipe.innerHTML = equipe.nomeEquipe
+            optionEquipe.value = equipe.nomeEquipe
+            comboEquipe.appendChild(optionEquipe)
+            console.log('Carregando equipes')
+
+           
+        })
+    }
 }
+
+// Evento change para acionar a função carregarMembros
+comboEquipe.addEventListener('change', () => {
+                
+    carregarMembros(comboEquipe.value)    
+})
+
+
+// Função para carregar os membros da equipe selecionada
+function carregarMembros(nome){
+
+    let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
+
+    let equipeSelecionada = listaEquipes.filter((equipe) => {
+        
+        return equipe.nomeEquipe == nome
+         
+    })
+
+    console.log('Membros carregados')
+
+    let optionCoordenador = document.createElement('option')
+    optionCoordenador.innerHTML = equipeSelecionada[0].coordenador
+    optionCoordenador.value = equipeSelecionada[0].coordenador
+    comboMembro.appendChild(optionCoordenador)
+    
+    let optionDev1 = document.createElement('option')
+    optionDev1.innerHTML = equipeSelecionada[0].dev1
+    optionDev1.value = equipeSelecionada[0].dev1
+    comboMembro.appendChild(optionDev1)
+
+    let optionDev2 = document.createElement('option')
+    optionDev2.innerHTML = equipeSelecionada[0].dev2
+    optionDev2.value = equipeSelecionada[0].dev2
+    comboMembro.appendChild(optionDev2)
+
+    let optionDev3 = document.createElement('option')
+    optionDev3.innerHTML = equipeSelecionada[0].dev3
+    optionDev3.value = equipeSelecionada[0].dev3
+    comboMembro.appendChild(optionDev3)
+}
+
+
 
 // Função de limpar o formulário
 function limparFormulario(){
+
     tituloTarefa.value = ""
     descricao.value = ""
     comboEquipe.value = ""
     comboMembro.value = ""
-   
-
     tituloTarefa.focus()
     console.log("Limpando Formulário")
 }
 
+// Evento do Botão sincronizar 
 document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
     event.preventDefault();
         
 })
 
+// Evento do botão Inserir
 document.querySelector("#btn-inserir").addEventListener('click', () => {
 
     event.preventDefault()
     console.log('Pegando dados com o Evento o Click')
-
-
-    
+       
     addLocalStorage()
     carregarLocalStorage()
     limparFormulario()
- 
-
 })

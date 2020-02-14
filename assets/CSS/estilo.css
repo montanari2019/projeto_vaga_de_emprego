@@ -1,3 +1,14 @@
+*{
+    margin: 0%; 
+    padding: 0%;
+    box-sizing: border-box;
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Css da tela equipe */
 
 .conteiner_ajuste{
     display: flex;
@@ -262,4 +273,126 @@
     font-size: 16px;
     line-height: 20px;
     color: #ffffff;
+}
+
+/* Css da tela de tarefas */
+
+.conteiner_main-tarefa{
+    display: flex;
+    flex-direction: column;
+}  
+@media(min-width: 650px){
+  
+    .conteiner_main-tarefa{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+}
+.label--main--tarefa{
+    display: block;
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 12px;
+    padding-top: 6px;
+    padding-bottom: 3px;
+    color: #6C757D;
+}
+
+.main-title--tarefa{
+    padding-top: 10%;
+    padding-left: 0;
+    font-family: 'Montserrat', 'sans-serif';
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+}
+.input-text-description{
+    margin-bottom: 5px;
+    padding: 6px;
+   
+    border: solid 1px #dbdbdb;
+    border-radius: 4px;
+    color: #6c757d;
+    height: 300px;
+    width: 310px;
+    font-size: 12px;
+}
+@media(min-width: 650px){
+    .input-text-description{
+        width: 100%;
+    }
+    .main-title--tarefa{
+        font-size: 20px;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+   
+}
+.selectCombo{
+    margin-top: 10px;
+    padding: 5px 25px;
+    border: solid 1px #dbdbdb;
+    border-radius: 5px;
+    -webkit-appearance: button;
+    outline: none;
+    color: #6C757D;
+}
+
+.titulo-tarefa{
+    
+    font-family: 'Montserrat', 'sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 10px;
+    color: #000000;
+
+}
+.div_card-tarefa{
+
+    border: solid 1px #e0e0e0;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    
+    padding: 2%;
+    
+}
+@media(min-width: 650px){
+    .div_card-tarefa{
+        /* width: 400px;
+        height: 350px; */
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+   
+}
+.descricao-tarefa{
+    font-family: 'Montserrat', 'sans-serif';
+    font-style: normal;
+    font-weight: normal;
+    text-align: justify;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 10px;
+    color: #303030;
+    width: 300px;
+    height: 200px;
+}
+@media(min-width: 650px){
+    .descricao-tarefa{
+        width: 400px;
+         height: 200px;
+    }
+}
+.equipe-tarefa{
+    font-family: 'Montserrat', 'sans-serif';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+   
 }
