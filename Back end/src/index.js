@@ -21,6 +21,9 @@ app.get('/api/v1', (req, res) => {
 const equipeRouter = require('./routes/equipeRouter')
 app.use('/api/v1/equipes', equipeRouter)
 
+const tarefaRouter = require('./routes/tarefaRouter')
+app.use('/api/v1/tarefas', tarefaRouter)
+
 // Passando porta 
 const port = 3010
 app.listen(port, () => { console.log(`Servidor rodando na porta ${port}`) })
