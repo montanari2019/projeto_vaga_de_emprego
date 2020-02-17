@@ -1,4 +1,4 @@
-Execute o scrip do banco de dados localizado na pasta database da pasta Back End
+Execute o script do banco de dados localizado na pasta database da pasta Back End
 
 Não equeça da linha 50 do schema.slq ela é fundamental para o acesso ao banco de dados
 
