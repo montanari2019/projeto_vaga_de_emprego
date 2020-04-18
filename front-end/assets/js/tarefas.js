@@ -1,4 +1,4 @@
-// Mapeando os dados das tarefas
+    // Mapeando os dados das tarefas
 let tituloTarefa = document.querySelector('#titulo-atividade')
 let descricao = document.querySelector('#descricao_atividade')
 let comboEquipe = document.querySelector('#selectEquipe')

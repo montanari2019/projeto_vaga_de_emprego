@@ -8,15 +8,18 @@ let nomeEquipe = document.querySelector('#equipe')
 // Buscando dado no HTML
 let lista = document.querySelector('#lista')
 
-function addlista(equipe, indice){
+function addlista(equipe){
+
+   
 
     let novaUl = document.createElement('ul')
     novaUl.classList.add('div-card')
 
     // Mapeando os dados 
 
+
     let linhaEquipe = document.createElement('li')
-    linhaEquipe.innerHTML = equipe.nomeEquipe
+    linhaEquipe.innerHTML = equipe.nome
     linhaEquipe.classList.add('lista-item-titulo')
 
     let linhaCoodenador = document.createElement('li')
@@ -46,8 +49,9 @@ function addlista(equipe, indice){
         let res = confirm('Deseja Deletar Essa equipe')
 
         if(res == true){
-            deletarEquipe(indice)
+            deleteEquipe(equipe.id)
             console.log('Deletando')
+            carregarEquipes()
         }
 
     })
@@ -64,53 +68,20 @@ function addlista(equipe, indice){
 
 }
 
-// Função de gravar dados no local Storage
-function addLocalStorage(){
+
+// Carregando dados da api
+function carregarEquipes(){
+
+    // Buscando da api
+    getEquipes()
+        .then((resposta) => {
+            lista.innerHTML = ''
+            resposta.forEach((r) =>{
+                addlista(r)
+            })
+        })   
+
     
-    let equipe = {
-        "nomeEquipe": nomeEquipe.value,
-        "coordenador": coordenador.value,
-        "dev1": dev1.value, 
-        "dev2": dev2.value,
-        "dev3": dev3.value
-    }
-    
-    if (localStorage.getItem("listaEquipes")){
-
-        let listaEquipes = JSON.parse(localStorage.getItem("listaEquipes"))
-        listaEquipes.push(equipe)
-        localStorage.setItem("listaEquipes", JSON.stringify(listaEquipes))
-
-        console.log('Gravando no LocalStorage existente')
-
-    } else {
-        
-        let listaEquipes = []
-        listaEquipes.push(equipe)
-        localStorage.setItem("listaEquipes", JSON.stringify(listaEquipes))
-
-        console.log('Gravando em um novo LocalStorage')
-    }
-    
-}
-
-// Carregando dados do local Storage
-function carregarLocarStorage(){
-
-    // Limpar a lista
-    lista.innerHTML = ''
-
-    if(localStorage.getItem("listaEquipes")){
-        
-        let listaEquipes = JSON.parse(localStorage.getItem('listaEquipes'))
-
-       
-        listaEquipes.forEach((equipe, id) => {
-            addlista(equipe, id)
-        })
-        console.log('Carregando do local storage')
-        
-    }
 }
 
 // Função de Deletar 
@@ -142,10 +113,7 @@ function limparFormulario(){
 document.querySelector('#btn-sincronizar').addEventListener('click', () =>{
     
     event.preventDefault();  
-    getEquipes()
-        .then((resposta) => {
-            resposta.forEach(r => console.log(r))
-        })   
+    
 })
 
 // evento do clik do botão inserir 
@@ -157,12 +125,7 @@ document.querySelector("#btn-inserir").addEventListener("click", () =>{
 
     postEquipes()
     console.log('Equipe Inserida')
-
-    addLocalStorage()
-
-    carregarLocarStorage()
-
-    
+    carregarEquipes() 
 
     limparFormulario()  
 })
@@ -174,8 +137,6 @@ function getEquipes(){
             .catch(erro => console.log(erro))
 }
 
-
-// Função que ta dando problema
 function postEquipes(){
 
     const data = {
@@ -190,7 +151,7 @@ function postEquipes(){
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
-            'Content-Type': 'appliction/json'
+            'Content-Type': 'application/json'
         }
         
     }
@@ -201,5 +162,20 @@ function postEquipes(){
         .then(res => res.json())
         .catch(erro => console.log(erro))
         
+}
+
+function deleteEquipe(id){
+
+    fetch(`http://localhost:3010/api/v1/equipes/${id}`, { method: 'DELETE' })
+    .then(resposta => resposta.json())
+    .catch(erro => console.log(erro))
+    console.log('Equipe Deletada id: ', id)
+
+    
+
+}
+function alterarEquipe(id){
+    
+
 }
 
